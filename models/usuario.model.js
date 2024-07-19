@@ -31,7 +31,7 @@ const UsuarioSchema = new Schema({
 
 //modificamos el esquema para no retornar el _id ni el __v
 UsuarioSchema.method('toJSON', function(){
-  const { __v, _id, ...object } = this.toObject();
+  const { __v, _id, password, ...object } = this.toObject();
 
   object.uuid = _id
   return object
