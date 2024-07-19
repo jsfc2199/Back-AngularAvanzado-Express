@@ -1,9 +1,10 @@
 const Usuario = require('../models/usuario')
 
-const getUsuarios = (req, res) => {
+const getUsuarios = async (req, res) => {
+    const usuarios = await Usuario.find({}, 'nombre email role google') //podemos filtrar lo que queremos que retorne
   res.status(200).json({
     ok: true,
-    usuarios: [],
+    usuarios
   });
 };
 
