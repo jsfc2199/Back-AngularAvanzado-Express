@@ -25,3 +25,5 @@ Esta sección tiene por objetivo trabajar fuertemente con Express, Mongo y Node:
 - Generación de un JWT
 - Middlewares
 - Optimizar Middlewares
+
+Nota: Para validar campos obligatorios instalamos npm i express-validator
