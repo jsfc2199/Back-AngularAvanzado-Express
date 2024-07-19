@@ -91,8 +91,37 @@ const actualizarUsuario = async (req, res) => {
   }
 };
 
+const deleteUsuario = async (req, res = response) => {
+  const { id } = req.params
+  try {
+
+    const usuarioDb = await Usuario.findById(id);
+
+    if (!usuarioDb) {
+      res.status(404).json({
+        ok: false,
+        msg: "no existe un usuario con ese id",
+      });
+    }
+
+    await Usuario.findOneAndDelete(id)
+
+    res.status(200).json({
+      ok: true,
+      msg: "Usuario eliminado",
+    })
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      msg: "error, revisar logs",
+    });
+  }
+  
+}
+
 module.exports = {
   getUsuarios,
   crearUsuarios,
   actualizarUsuario,
+  deleteUsuario
 };
