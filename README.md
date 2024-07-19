@@ -8,3 +8,20 @@ Esta sección tiene como objetivo preparar todo lo necesario para comenzar a cre
 - Aprender un poco sobre los errores de respuestas HTTP
 - Configuración inicial de Express
 - Establecer las bases de nuestros RESTful services
+
+## Hospital App Backend Server
+Esta sección tiene por objetivo trabajar fuertemente con Express, Mongo y Node:
+
+- Explicación general y alcances del Backend
+- Crear colección de Usuarios
+- Crear modelos en Node
+- POST
+- Validaciones automáticas mediante Mongoose
+- Encriptar contraseñas
+- PUT
+- Delete
+- Get
+- Login de Usuario
+- Generación de un JWT
+- Middlewares
+- Optimizar Middlewares
