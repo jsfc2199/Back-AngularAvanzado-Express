@@ -1,5 +1,5 @@
 # Backend Node para Curso Angular Avanzado
-Esta sección tiene como objetivo preparar todo lo necesario para comenzar a crear nuestro backend server: npm install express --save; npm i nodemon
+Esta sección tiene como objetivo preparar todo lo necesario para comenzar a crear nuestro backend server: npm install express --save; npm i nodemon; npm i mongoose, npm i dotenv
 
 - Configuración de Mongo
 - Robo 3T
