@@ -1,6 +1,6 @@
 //Creando servidor
 const express = require("express");
-const cors = require('cors')
+const cors = require("cors");
 
 const { dbConnection } = require("./database/config");
 
@@ -8,18 +8,13 @@ const { dbConnection } = require("./database/config");
 const app = express();
 
 //Configuración de Cors
-app.use(cors()) //Middleware(Interceptor) donde cada que se haga una petición siempre pasará primero por el Cors
+app.use(cors()); //Middleware(Interceptor) donde cada que se haga una petición siempre pasará primero por el Cors
 
-//Llamando la conexión a Base de datos de mongo 
+//Llamando la conexión a Base de datos de mongo
 dbConnection();
 
 //rutas
-app.get("/", (req, res) => {
-  res.status(200).json({
-    ok: true,
-    msg: "Hola",
-  });
-});
+app.use("/api/usuarios", require("./routes/usuarios.route")); //cualquier petición que pase por api/usuarios, será interceptada aquí
 
 app.listen(6321, () => {
   console.log("Servidor corriendo");
