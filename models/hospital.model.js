@@ -11,6 +11,7 @@ const HospitalSchema = new Schema({
   }, 
   //relación con el usuario que lo crea
   usuario: {
+    required:true,
     type: Schema.Types.ObjectId,
     ref: 'Usuario'
   }, 

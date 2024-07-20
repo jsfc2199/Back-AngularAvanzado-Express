@@ -1,5 +1,5 @@
 /*
-    Ruta, /api/hospitales
+    Ruta, /api/medicos
 */
 const { check } = require("express-validator");
 const { Router } = require("express");
