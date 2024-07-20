@@ -1,10 +1,13 @@
+const path = require("path");
+const fs = require("fs");
+
 const { response } = require("express");
 const { v4 } = require("uuid");
 
 const Usuario = require("../models/usuario.model");
 const Hospital = require("../models/hospital.model");
 const Medico = require("../models/medico.model");
-const {actualizarImagen} = require("../helpers/actualizar-imagen.helper");
+const { actualizarImagen } = require("../helpers/actualizar-imagen.helper");
 
 const fileUpload = async (req, res = response) => {
   const tipo = req.params.tipo;
@@ -57,16 +60,31 @@ const fileUpload = async (req, res = response) => {
       });
 
     //actualizar bd
-    actualizarImagen(tipo, id, fileName)
+    actualizarImagen(tipo, id, fileName);
 
     res.status(200).json({
       ok: true,
       msg: "archivo subido",
       fileName,
     });
-  }); 
+  });
+};
+
+const retornaImagen = (req, res) => {
+  const tipo = req.params.tipo;
+  const foto = req.params.foto;
+
+  const pathImg = path.join(__dirname, `../uploads/${tipo}/${foto}`);
+
+  if (fs.existsSync(pathImg)) {
+    res.sendFile(pathImg);
+  } else {
+    const pathImg = path.join(__dirname, `../uploads/no-image.png`);
+    res.sendFile(pathImg);
+  }
 };
 
 module.exports = {
   fileUpload,
+  retornaImagen,
 };
