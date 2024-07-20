@@ -1,10 +1,12 @@
 const { response } = require("express");
-const Hospital = require('../models/hospital.model')
+const Hospital = require("../models/hospital.model");
 
-const getHospitales = (req, res = response) => {
+const getHospitales = async (req, res = response) => {
+  //usamos populate para traer las relaciones
+  const hospitales = await Hospital.find().populate("usuario", "nombre img");
   res.json({
     ok: true,
-    msg: "getHospitales",
+    msg: hospitales,
   });
 };
 const actualizarHospital = (req, res = response) => {
@@ -13,15 +15,14 @@ const actualizarHospital = (req, res = response) => {
     msg: "actualizarHospital",
   });
 };
-const crearHospital = async(req, res = response) => {
-
-  const uuid = req.uuid
+const crearHospital = async (req, res = response) => {
+  const uuid = req.uuid;
   const hospital = new Hospital({
     usuario: uuid, //relacionamos el uuid del usuario al hospital
-    ...req.body
-  })  
+    ...req.body,
+  });
   try {
-    const hospitalDb = await hospital.save()
+    const hospitalDb = await hospital.save();
     res.json({
       ok: true,
       msg: hospitalDb,
@@ -32,7 +33,6 @@ const crearHospital = async(req, res = response) => {
       msg: "Hable con el admin",
     });
   }
-  
 };
 const borrarHospital = (req, res = response) => {
   res.json({
@@ -45,5 +45,5 @@ module.exports = {
   getHospitales,
   actualizarHospital,
   crearHospital,
-  borrarHospital
+  borrarHospital,
 };

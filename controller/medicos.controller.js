@@ -1,9 +1,13 @@
 const { response } = require("express");
-const Medico = require('../models/medico.model')
-const getMedicos = (req, res = response) => {
+const Medico = require("../models/medico.model");
+const getMedicos = async (req, res = response) => {
+  const medicos = await Medico.find()
+  .populate("usuario", "nombre img")
+  .populate("hospital", "nombre hospital")
+
   res.json({
     ok: true,
-    msg: "getMedicos",
+    msg: medicos,
   });
 };
 const actualizarMedico = (req, res = response) => {
@@ -12,14 +16,14 @@ const actualizarMedico = (req, res = response) => {
     msg: "actualizarMedico",
   });
 };
-const crearMedico = async(req, res = response) => {
-  const uuid = req.uuid
+const crearMedico = async (req, res = response) => {
+  const uuid = req.uuid;
   const medico = new Medico({
     usuario: uuid, //relacionamos el uuid del usuario al hospital
-    ...req.body
-  })
+    ...req.body,
+  });
   try {
-    const medicoDb = await medico.save()
+    const medicoDb = await medico.save();
     res.json({
       ok: true,
       msg: medicoDb,
@@ -42,5 +46,5 @@ module.exports = {
   getMedicos,
   actualizarMedico,
   crearMedico,
-  borrarMedico
+  borrarMedico,
 };
