@@ -15,7 +15,7 @@ const getUsuarios = async (req, res) => {
 
   //evitamos muchos await con un promise.all
   const [usuarios, total] = await Promise.all([
-    Usuario.find({}, "nombre email role google") //podemos filtrar lo que queremos que retorne
+    Usuario.find({}, "nombre email role google img") //podemos filtrar lo que queremos que retorne
     .skip(desde).limit(5),
     Usuario.countDocuments()
   ])
