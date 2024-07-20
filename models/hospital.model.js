@@ -1,7 +1,7 @@
 //Modelo de mongoose
 const { Schema, model } = require("mongoose");
 
-const MedicoSchema = new Schema({
+const HospitalSchema = new Schema({
   nombre: {
     type: String,
     required: true
@@ -14,17 +14,13 @@ const MedicoSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Usuario'
   }, 
-  usuario: {
-    type: Schema.Types.ObjectId,
-    ref: 'Hospital'
-  }, 
-}, {collection: 'Medicos'}); //el collection es para darle el nombre que queremos a la bd
+}, {collection: 'hospitales'}); //el collection es para darle el nombre que queremos a la bd
 
 //modificamos el esquema para no retornar el _id ni el __v
-MedicoSchema.method('toJSON', function(){
+HospitalSchema.method('toJSON', function(){
   const { __v, ...object } = this.toObject();
   return object
 })
 
 //exponemos el esquema
-module.exports = model('Medico', MedicoSchema)
+module.exports = model('Hospital', HospitalSchema)
