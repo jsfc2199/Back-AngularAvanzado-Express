@@ -21,6 +21,8 @@ app.use("/api/usuarios", require("./routes/usuarios.route")); //cualquier petici
 app.use("/api/login", require("./routes/auth.route")); //cualquier petición que pase por api/usuarios, será interceptada aquí
 app.use("/api/hospitales", require("./routes/hospitales.route"));
 app.use("/api/medicos", require("./routes/medicos.route"));
+app.use("/api/todo", require("./routes/todo.route"));
+
 
 
 app.listen(6321, () => {
