@@ -27,3 +27,4 @@ Esta sección tiene por objetivo trabajar fuertemente con Express, Mongo y Node:
 - Optimizar Middlewares
 
 Nota: Para validar campos obligatorios instalamos npm i express-validator
+Nota: Para jwt instalamos npm i jsonwebtoken
