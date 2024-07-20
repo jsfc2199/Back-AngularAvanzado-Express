@@ -17,7 +17,12 @@ const {
 const router = Router();
 
 router.get("/", getMedicos);
-router.post("/", [], crearMedico);
+router.post("/", [
+  validarJWT,
+  check("nombre", "el nombre del medico es necesario").not().isEmpty(),
+  check("hospital", "el id del hospital es necesario").not().isEmpty(),
+  validarCampos
+], crearMedico);
 
 router.put("/:id", [], actualizarMedico);
 

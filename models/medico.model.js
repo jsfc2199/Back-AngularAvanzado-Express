@@ -12,11 +12,13 @@ const MedicoSchema = new Schema({
   //relación con el usuario que lo crea
   usuario: {
     type: Schema.Types.ObjectId,
-    ref: 'Usuario'
+    ref: 'Usuario',
+    required:true
   }, 
   hospital: {
     type: Schema.Types.ObjectId,
-    ref: 'Hospital'
+    ref: 'Hospital',
+    required:true
   }, 
 }, {collection: 'Medicos'}); //el collection es para darle el nombre que queremos a la bd
 
