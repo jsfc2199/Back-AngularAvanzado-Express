@@ -19,7 +19,7 @@ dbConnection();
 //rutas
 app.use("/api/usuarios", require("./routes/usuarios.route")); //cualquier petición que pase por api/usuarios, será interceptada aquí
 app.use("/api/login", require("./routes/auth.route")); //cualquier petición que pase por api/usuarios, será interceptada aquí
-
+app.use("/api/hospitales", require("./routes/hospitales.route"));
 
 app.listen(6321, () => {
   console.log("Servidor corriendo");
