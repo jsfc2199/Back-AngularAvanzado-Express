@@ -5,10 +5,25 @@ const { generarJWT } = require("../helpers/jwt.helper");
 const Usuario = require("../models/usuario.model");
 
 const getUsuarios = async (req, res) => {
-  const usuarios = await Usuario.find({}, "nombre email role google"); //podemos filtrar lo que queremos que retorne
+  const desde = +req.query.desde || 0
+  
+
+  // const usuarios = await Usuario.find({}, "nombre email role google") //podemos filtrar lo que queremos que retorne
+  // .skip(desde).limit(5) 
+
+  // const total = await Usuario.countDocuments()
+
+  //evitamos muchos await con un promise.all
+  const [usuarios, total] = await Promise.all([
+    Usuario.find({}, "nombre email role google") //podemos filtrar lo que queremos que retorne
+    .skip(desde).limit(5),
+    Usuario.countDocuments()
+  ])
+
   res.status(200).json({
     ok: true,
     usuarios,
+    total,
     uuid: req.uuid //leemos el uuid seteado por el middleware del jwt
   });
 };
