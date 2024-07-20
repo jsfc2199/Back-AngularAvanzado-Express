@@ -22,6 +22,8 @@ app.use("/api/login", require("./routes/auth.route")); //cualquier petición que
 app.use("/api/hospitales", require("./routes/hospitales.route"));
 app.use("/api/medicos", require("./routes/medicos.route"));
 app.use("/api/todo", require("./routes/todo.route"));
+app.use("/api/upload", require("./routes/upload.route"));
+
 
 
 
