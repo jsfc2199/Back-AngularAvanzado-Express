@@ -9,6 +9,7 @@ const getUsuarios = async (req, res) => {
   res.status(200).json({
     ok: true,
     usuarios,
+    uuid: req.uuid //leemos el uuid seteado por el middleware del jwt
   });
 };
 

@@ -28,3 +28,4 @@ Esta sección tiene por objetivo trabajar fuertemente con Express, Mongo y Node:
 
 Nota: Para validar campos obligatorios instalamos npm i express-validator
 Nota: Para jwt instalamos npm i jsonwebtoken
+Nota: El jwt lo usamos para tener cierto tipo de protección en las rutas
