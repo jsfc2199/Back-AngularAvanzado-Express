@@ -4,6 +4,7 @@ const { v4 } = require("uuid");
 const Usuario = require("../models/usuario.model");
 const Hospital = require("../models/hospital.model");
 const Medico = require("../models/medico.model");
+const {actualizarImagen} = require("../helpers/actualizar-imagen.helper");
 
 const fileUpload = async (req, res = response) => {
   const tipo = req.params.tipo;
@@ -54,6 +55,9 @@ const fileUpload = async (req, res = response) => {
         ok: false,
         msg: "error al mover la imagen",
       });
+
+    //actualizar bd
+    actualizarImagen(tipo, id, fileName)
 
     res.status(200).json({
       ok: true,
