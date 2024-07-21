@@ -2,6 +2,7 @@ const { response, json } = require("express");
 const Usuario = require("../models/usuario.model");
 const bcrypt = require("bcryptjs");
 const { generarJWT } = require("../helpers/jwt.helper");
+const { googleVerify } = require("../database/google-verify");
 
 const login = async (req, res = response) => {
   const { email, password } = req.body;
@@ -40,14 +41,24 @@ const login = async (req, res = response) => {
   }
 };
 
-const loginGoogle = (req, res) => {
-  res.status(500).json({
-    ok: true,
-    msg: req.body.token
-  });
-}
+const loginGoogle = async (req, res) => {
+  try {
+    const { email, name, picture } = await googleVerify(req.body.token);
+    res.json({
+      ok: true,
+      email,
+      name,
+      picture,
+    });
+  } catch (error) {
+    res.status(500).json({
+      ok: true,
+      msg: "token no correcto",
+    });
+  }
+};
 
 module.exports = {
   login,
-  loginGoogle
+  loginGoogle,
 };

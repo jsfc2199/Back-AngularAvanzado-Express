@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>google sign in</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Iniciar sesion google</h1>
     <div id="buttonDiv"></div>
     <script src="https://accounts.google.com/gsi/client" async></script>
     <script>
-        function handleCredentialResponse(response) {
-          console.log("Encoded JWT ID token: " + response.credential); //obtenemos el token de google
-        }
-        window.onload = function () {
-          google.accounts.id.initialize({
-            client_id: "780420120770-9nljp36bfii6d70hkvp6tepol8v18t72.apps.googleusercontent.com",
-            callback: handleCredentialResponse
-          });
-          google.accounts.id.renderButton(
-            document.getElementById("buttonDiv"),
-            { theme: "outline", size: "large" }  // customization attributes
-          );
-          google.accounts.id.prompt(); // also display the One Tap dialog
-        }
-      </script>
-      
-</body>
+      var url = "http://localhost:6321/api/login/google";
+      function handleCredentialResponse(response) {
+        //   console.log("Encoded JWT ID token: " + response.credential); //obtenemos el token de google
+        fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token: response.credential }),
+        })
+          .then(res => res.json())
+          .then(data => console.log("data de google", data))
+          .catch(err => console.log(err));
+      }
+      window.onload = function () {
+        google.accounts.id.initialize({
+          client_id:
+            "780420120770-9nljp36bfii6d70hkvp6tepol8v18t72.apps.googleusercontent.com",
+          callback: handleCredentialResponse,
+        });
+        google.accounts.id.renderButton(
+          document.getElementById("buttonDiv"),
+          { theme: "outline", size: "large" } // customization attributes
+        );
+        google.accounts.id.prompt(); // also display the One Tap dialog
+      };
+    </script>
+  </body>
 </html>
