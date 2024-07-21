@@ -59,3 +59,13 @@ Esta sección esta especializada en implementar el Google Sign-in en nuestro bac
 
 Usaremos la documentación oficial https://developers.google.com/identity/gsi/web/guides/overview?hl=es-419
 npm install google-auth-library --save
+
+## Crud Médicos y Hospitales
+En esta sección continuaremos el CRUD faltante de los médicos y hospitales, puntualmente seguiremos con los temas de:
+
+- Modelos
+- Grabaciones
+- Queries
+- Endpoints faltantes
+
+Entre otras cosas, la idea es terminar nuestro backend para empezar a conectarlo con Angular.
