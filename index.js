@@ -10,6 +10,9 @@ const app = express();
 //Configuración de Cors
 app.use(cors()); //Middleware(Interceptor) donde cada que se haga una petición siempre pasará primero por el Cors
 
+//carpeta publica
+app.use(express.static('public'))
+
 //Lectura y parseo del body, para leer el body de postman en cualquier petición
 app.use(express.json()) 
 

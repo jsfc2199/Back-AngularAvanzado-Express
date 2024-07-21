@@ -40,6 +40,14 @@ const login = async (req, res = response) => {
   }
 };
 
+const loginGoogle = (req, res) => {
+  res.status(500).json({
+    ok: true,
+    msg: req.body.token
+  });
+}
+
 module.exports = {
   login,
+  loginGoogle
 };
