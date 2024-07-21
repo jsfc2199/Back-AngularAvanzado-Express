@@ -9,11 +9,38 @@ const getHospitales = async (req, res = response) => {
     msg: hospitales,
   });
 };
-const actualizarHospital = (req, res = response) => {
-  res.json({
-    ok: true,
-    msg: "actualizarHospital",
-  });
+const actualizarHospital = async (req, res = response) => {
+  try {
+
+    const idHospital = req.params.id
+    const idUsuario = req.uuid
+
+    const hospitalDb = await Hospital.findById(idHospital)
+    if(!hospitalDb){
+      res.status(404).json({
+        ok: false,
+        msg: "No existe hospital con ese id",
+      });
+    }
+
+    const cambiosHospital = {
+      ...req.body,
+      usuario: idUsuario
+    }
+    const hospitalActualizado = await Hospital.findByIdAndUpdate(idHospital, cambiosHospital, {new : true})
+   
+    res.json({
+      ok: true,
+      hospital: hospitalActualizado
+    });
+    
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      msg: "Hable con el admin",
+    });
+  }
+  
 };
 const crearHospital = async (req, res = response) => {
   const uuid = req.uuid;
