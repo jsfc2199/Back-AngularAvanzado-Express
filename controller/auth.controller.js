@@ -44,11 +44,35 @@ const login = async (req, res = response) => {
 const loginGoogle = async (req, res) => {
   try {
     const { email, name, picture } = await googleVerify(req.body.token);
+    const usuarioDb = await Usuario.findOne({email})
+
+    let usuario;
+
+    if(!usuarioDb){
+      usuario = new Usuario({
+        nombre: name,
+        email,
+        password: '@@@',
+        img: picture,
+        google: true //de que se grabó el usuario a través de google
+      })
+    }else{
+      usuario = usuarioDb
+      usuario.google = true;
+    }
+
+    //guardar usuario
+    await usuario.save()
+
+    //generar JWT
+    const token = await generarJWT(usuario.id)
+    
     res.json({
       ok: true,
       email,
       name,
       picture,
+      token
     });
   } catch (error) {
     res.status(500).json({
