@@ -84,12 +84,15 @@ const loginGoogle = async (req, res) => {
 
 const renewToken = async (req, res) => {
   const id = req.uuid
+
   //generar JWT
   const token = await generarJWT(id)
+  const userDb = await Usuario.findById(id)
 
   res.json({
     ok:true,
-    token
+    token,
+    userDb
   })
 }
 
