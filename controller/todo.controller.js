@@ -53,7 +53,7 @@ const getDocumentosCollection = async (req, res = response) => {
       });
   }
 
-  res.status(400).json({
+  res.status(200).json({
     ok: true,
     data,
   });
