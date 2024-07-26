@@ -6,7 +6,7 @@ const getHospitales = async (req, res = response) => {
   const hospitales = await Hospital.find().populate("usuario", "nombre img");
   res.json({
     ok: true,
-    msg: hospitales,
+    hospitales,
   });
 };
 const actualizarHospital = async (req, res = response) => {
@@ -52,7 +52,7 @@ const crearHospital = async (req, res = response) => {
     const hospitalDb = await hospital.save();
     res.json({
       ok: true,
-      msg: hospitalDb,
+      hospitalDb,
     });
   } catch (error) {
     res.status(500).json({
